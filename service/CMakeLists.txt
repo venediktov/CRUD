@@ -22,4 +22,5 @@ add_executable(
 target_link_libraries(
 	my_service
 	${Boost_LIBRARIES}
+	pthread
 	)
