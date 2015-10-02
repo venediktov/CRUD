@@ -16,7 +16,7 @@
 #include <boost/asio.hpp>
 #include "server.hpp"
 #include "request_handler.hpp"
-#include "../handlers/crud_dispathcher.hpp"
+#include "../handlers/crud_dispatcher.hpp"
 #include "request.hpp"
 #include "reply.hpp"
  

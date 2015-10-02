@@ -5,7 +5,7 @@
 * Created on September 29, 2015, 6:06 PM
 */
  
-#ifndef _HTTP_CRUD_MATCHER_HPP
+#ifndef _HTTP_CRUD_MATCHER_HPP__
 #define                _HTTP_CRUD_MATCHER_HPP__
  
 #include <functional>
