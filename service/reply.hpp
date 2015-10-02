@@ -16,6 +16,7 @@
 #include <string>
 #include <vector>
 #include <boost/asio.hpp>
+#include <boost/serialization/strong_typedef.hpp>
 #include "header.hpp"
 
 namespace http {
@@ -24,6 +25,7 @@ namespace server {
 /// A reply to be sent to a client.
 struct reply
 {
+  BOOST_STRONG_TYPEDEF(std::string, flush)  
   /// The status of the reply.
   enum status_type
   {

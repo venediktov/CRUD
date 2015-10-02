@@ -11,6 +11,7 @@
 // added operator<< to stream data into reply and flush it
 
 #include "reply.hpp"
+#include "mime_types.hpp"
 #include <string>
 
 namespace http {
