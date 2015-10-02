@@ -1,4 +1,7 @@
-find_package(Boost)
+find_package(
+	Boost
+	COMPONENTS system regex
+	)
 
 ADD_DEFINITIONS(
 	-std=c++11 # Or -std=c++0x
@@ -14,4 +17,9 @@ add_executable(
 	reply.cpp
 	request_handler.cpp
 	request_parser.cpp
+	)
+
+target_link_libraries(
+	my_service
+	${Boost_LIBRARIES}
 	)
