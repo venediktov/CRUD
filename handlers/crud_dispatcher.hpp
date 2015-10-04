@@ -63,7 +63,7 @@ namespace http { namespace crud {
         crud_dispatcher(const std::string &base_path) : _base_path(base_path) {}
         crud_matcher_type & crud_match(const boost::regex &expression) {
             crud_matcher_type_p & p = _crud_matchers[expression] ;
-            if(!p.get()) { // should be if (!p)
+            if(!p) {
                 p = std::make_shared<crud_matcher_type>(expression) ;
             }
             return *p;

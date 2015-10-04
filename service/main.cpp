@@ -43,23 +43,24 @@ int main(int argc, char* argv[])
    
     // READ or CREAT/UPDATE "/venue_handler/XEMDP/123"
     handler.crud_match(boost::regex("/venue_handler/(\\w+)/(\\d+)") )
-        .get([](http::server::reply & r, const boost::cmatch & what) {
-            r << "name: " << what[1] << ", instance number: " << what[2]
+        .get([](http::server::reply & r, const http::crud::crud_match<boost::cmatch> & match) {
+            r << "name: " << match[1] << ", instance number: " << match[2]
               << http::server::reply::flush("text") ;
-//            std::cout << "request=" << what[0] << std::endl;
+            std::cout << "GET request=" << match[0] << std::endl;
         })
-        .post([](http::server::reply & r, const boost::cmatch & what) {
-            r << "name: " << what[1] << ", instance number: " << what[2]
+        .post([](http::server::reply & r, const http::crud::crud_match<boost::cmatch>  & match) {
+            r << "name: " << match[1] << ", instance number: " << match[2]
               << http::server::reply::flush("test") ;
-//            std::cout << "request=" << what[0] << std::endl;
+            std::cout << "POST request=" << match[0] << std::endl;
+            std::cout << "POST request_data=" << match.data << std::endl;
         }) ;
        
     // READ "/venue_handler/FLO/"
     handler.crud_match(boost::regex("/venue_handler/(\\w+)") )
-        .get([](http::server::reply & r, const boost::cmatch & what) {
-            r << "name: " << what[1]
+        .get([](http::server::reply & r, const http::crud::crud_match<boost::cmatch> & match) {
+            r << "name: " << match[1]
               << http::server::reply::flush("text") ;
-//            std::cout << "request=" << what[0] << std::endl;
+            std::cout << "GET request=" << match[0] << std::endl;
         });
        
     http::server::server<restful_dispatcher_t> s(argv[1], argv[2], handler);

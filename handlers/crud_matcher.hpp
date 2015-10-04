@@ -13,9 +13,16 @@
 #include <string>
  
 namespace http { namespace crud {
+    
+    template<typename Matched>
+    struct crud_match : Matched {
+        crud_match(const Matched &m, const std::string &d) : Matched(m) , data(d) {}
+        std::string data;
+    };
+    
     template<typename Response, typename Regex, typename Matched>
     struct crud_matcher {
-        typedef std::function<void(Response &, const Matched &)>  request_handler_type;
+        typedef std::function<void(Response &, const crud_match<Matched> &)>  request_handler_type;
         typedef crud_matcher<Response, Regex, Matched> self_type ;
         explicit crud_matcher(const Regex &expression) : _expression(expression) {}
         self_type & get(request_handler_type handler) {
@@ -37,7 +44,8 @@ namespace http { namespace crud {
         template<typename Request>
         void handle_request(const Request& request, Response& response, const Matched &what) {
              //dispatching to matching based on CRUD handler
-            _handlers[request.method](response, what) ;
+            crud_match<Matched> match(what, request.data) ;
+            _handlers[request.method](response, match) ;
         }
     private:
        Regex _expression;

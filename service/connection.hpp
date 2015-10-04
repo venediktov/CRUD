@@ -13,11 +13,12 @@
 #ifndef HTTP_CONNECTION_HPP
 #define HTTP_CONNECTION_HPP
  
-//#include <array>
-#include <boost/array.hpp>
+#include <array>
 #include <memory>
 #include <utility>
+#include <iterator>
 #include <boost/asio.hpp>
+#include <boost/lexical_cast.hpp>
 #include "reply.hpp"
 #include "request.hpp"
 #include "request_parser.hpp"
@@ -69,9 +70,16 @@ private:
           if (!ec)
           {
             request_parser::result_type result;
-            std::tie(result, std::ignore) = request_parser_.parse(
+            char * data;
+            std::tie(result, data) = request_parser_.parse(
                 request_, buffer_.data(), buffer_.data() + bytes_transferred);
- 
+            auto itr = std::find_if( request_.headers.begin(), 
+                                     request_.headers.end(), 
+                                     [](const header &h) { return h.name == "Content-Length" ; }
+            ) ;
+            if ( itr != request_.headers.end()) {
+                request_.data = std::string(data, boost::lexical_cast<long>(itr->value)) ;
+            }
             if (result == request_parser::good)
             {
               request_handler_.handle_request(request_, reply_);
@@ -126,8 +134,7 @@ private:
   request_handler_type& request_handler_;
  
   /// Buffer for incoming data.
-  //std::array<char, 8192> buffer_;
-  boost::array<char, 8192> buffer_;
+  std::array<char, 8192> buffer_;
  
   /// The incoming request.
   request request_;
