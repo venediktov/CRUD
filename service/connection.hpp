@@ -7,8 +7,10 @@
 // Distributed under the Boost Software License, Version 1.0. (See accompanying
 // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
 // Modified by Vladimir Venediktov :
-// Adding template paramter to work with any request_handler , not just reated by M. Kohlhoff HTTP request handler
-// removing connection.cpp from my project 
+// 1.) Adding template paramter to work with any request_handler , not just created by M. Kohlhoff HTTP request handler
+// connection.cpp no longer needed in  my project 
+// 2.) Adding support for POST std::tie(result, std::ignore) --> std::tie(result, data) , and 
+//     populating request_.data see find_if search for "Content-Type"
  
 #ifndef HTTP_CONNECTION_HPP
 #define HTTP_CONNECTION_HPP
