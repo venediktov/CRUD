@@ -196,7 +196,6 @@ before_script:
   - sudo apt-get update -qq
   - sudo apt-get install libboost-all-dev
 
-script:
-  make CXX=$COMPILER -j3
+script: mkdir build && cd build && cmake ..  && make CXX=$COMPILER -j3 VERBOSE=1 && cd ..
 
 
