@@ -7,7 +7,7 @@ matrix:
       addons:
         apt:
           sources: ['ubuntu-toolchain-r-test']
-          packages: ['g++-4.8']
+          packages: ['g++-4.8' 'cmake' ']
       env:
         - COMPILER=g++-4.8
 
@@ -22,8 +22,8 @@ matrix:
 
 
 before_script:
-  - sudo add-apt-repository --yes ppa:ndk-u/boost
-  - sudo apt-get update
+  - sudo add-apt-repository --yes ppa:ostogvin/tjo-develop
+  - sudo apt-get install --yes --force-yes libboost-all-dev
 
 script: mkdir build && cd build && cmake .. -G "Unix Makefiles"  && make CXX=$COMPILER -j3 VERBOSE=1 && cd ..
 
