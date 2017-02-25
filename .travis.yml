@@ -7,7 +7,7 @@ matrix:
       addons:
         apt:
           sources: ['ubuntu-toolchain-r-test']
-          packages: ['g++-5']
+          packages: ['g++-4.9']
       env:
         - COMPILER=g++-5
 
@@ -22,8 +22,8 @@ matrix:
 
 
 before_script:
-  - sudo apt-add-repository --yes ppa:boost-latest/ppa
-  - sudo apt-get install libboost-all-dev
+  - sudo add-apt-repository --yes ppa:samuel-bachmann/boost
+  - sudo apt-get update
 
 script: mkdir build && cd build && cmake .. -G "Unix Makefiles"  && make CXX=$COMPILER -j3 VERBOSE=1 && cd ..
 
