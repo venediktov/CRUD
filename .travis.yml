@@ -7,18 +7,18 @@ matrix:
       addons:
         apt:
           sources: ['ubuntu-toolchain-r-test']
-          packages: ['g++-4.9']
+          packages: ['g++-4.8']
       env:
-        - COMPILER=g++-5
+        - COMPILER=g++-4.8
 
     - os: linux
       compiler: gcc
       addons:
         apt:
           sources: ['ubuntu-toolchain-r-test']
-          packages: ['g++-6']
+          packages: ['g++-4.9']
       env:
-        - COMPILER=g++-6
+        - COMPILER=g++-4.9
 
 
 before_script:
