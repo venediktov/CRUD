@@ -21,9 +21,13 @@ matrix:
         - COMPILER=g++-4.9
 
 
-before_script:
+before_install:
   - sudo add-apt-repository --yes ppa:ostogvin/tjo-develop
-  - sudo apt-get install --yes --force-yes libboost-all-dev
+  - sudo apt-get update
+
+install:
+    # or another boost version
+    - sudo apt-get install --yes --force-yes boost-1.60
 
 script: mkdir build && cd build && cmake .. -G "Unix Makefiles"  && make CXX=$COMPILER -j3 VERBOSE=1 && cd ..
 
