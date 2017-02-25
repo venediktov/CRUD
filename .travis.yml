@@ -22,7 +22,7 @@ matrix:
 
 
 before_script:
-  - sudo add-apt-repository --yes ppa:samuel-bachmann/boost
+  - sudo add-apt-repository --yes ppa:ndk-u/boost
   - sudo apt-get update
 
 script: mkdir build && cd build && cmake .. -G "Unix Makefiles"  && make CXX=$COMPILER -j3 VERBOSE=1 && cd ..
