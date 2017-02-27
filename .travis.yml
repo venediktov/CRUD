@@ -32,7 +32,7 @@ install:
   - sudo apt-get install libstdc++-4.9-dev
   # Install newer boost compatible with gcc 4.9.
   - env
-  - if [ "$CXX" = "g++" ]; then export CXX=$COMPILER CC=$COMPILER" BOOST_TOOLSET=gcc; fi
+  - if [ "$CXX" = "g++" ]; then export CXX=$COMPILER CC=$COMPILER BOOST_TOOLSET=gcc; fi
   - export DOWNLOAD_ROOT="$HOME/download"; if [ ! -d "$DOWNLOAD_ROOT" ]; then mkdir -p "$DOWNLOAD_ROOT"; fi
   - export BOOST_DOWNLOAD_URL="http://sourceforge.net/projects/boost/files/boost/1.58.0/boost_1_58_0.tar.bz2/download"
   - export BOOST_ROOT="$TRAVIS_BUILD_DIR/../boost"
