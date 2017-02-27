@@ -8,14 +8,34 @@ matrix:
       addons:
         apt:
           sources: ['ubuntu-toolchain-r-test']
-          packages: ['g++-5']
+          packages: ['g++-4.8']
       env:
-        - COMPILER=g++-5
+        - COMPILER=g++-4.8
 
+<<<<<<< HEAD
 
 before_install:
   - sudo apt-get update -qq
   - sudo apt-get install -qq 
+=======
+    - os: linux
+      compiler: gcc
+      addons:
+        apt:
+          sources: ['ubuntu-toolchain-r-test']
+          packages: ['g++-4.9']
+      env:
+        - COMPILER=g++-4.9
+
+
+before_install:
+  - sudo add-apt-repository --yes ppa:ostogvin/tjo-develop
+  - sudo apt-get update
+
+install:
+    # or another boost version
+    - sudo apt-get install --yes --force-yes boost-1.60
+>>>>>>> 05abb1116c224bce010b7a080eb8fb4befb55db2
 
 install:
   # install gcc-4.9 with c++11 support: https://github.com/travis-ci-tester/travis-test-gcc-cxx-11
