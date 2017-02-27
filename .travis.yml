@@ -9,7 +9,8 @@ matrix:
           sources: ['ubuntu-toolchain-r-test']
           packages: ['g++-4.9']
       env:
-        - COMPILER=g++-4.9
+        - COMPILER_CXX=g++-4.9
+        - COMPILER_CC=gcc-4.9
         - CMAKE_VERSION="3.2.2"
 
 cache:
@@ -32,7 +33,7 @@ install:
   - sudo apt-get install libstdc++-4.9-dev
   # Install newer boost compatible with gcc 4.9.
   - env
-  - if [ "$CXX" = "g++" ]; then export CXX=$COMPILER CC=$COMPILER BOOST_TOOLSET=gcc; fi
+  - if [ "$CXX" = "g++" ]; then export CXX=$COMPILER_CXX CC=$COMPILER_CC BOOST_TOOLSET=gcc; fi
   - export DOWNLOAD_ROOT="$HOME/download"; if [ ! -d "$DOWNLOAD_ROOT" ]; then mkdir -p "$DOWNLOAD_ROOT"; fi
   - export BOOST_DOWNLOAD_URL="http://sourceforge.net/projects/boost/files/boost/1.58.0/boost_1_58_0.tar.bz2/download"
   - export BOOST_ROOT="$TRAVIS_BUILD_DIR/../boost"
@@ -46,10 +47,10 @@ install:
   - openssl sha1 "cmake-${CMAKE_VERSION}.tar.gz"
   - tar xf "cmake-${CMAKE_VERSION}.tar.gz"
   - cd "cmake-${CMAKE_VERSION}"
-  - ./bootstrap --prefix=~
+  - ./bootstrap --prefix=$HOME
   - make
   - make install
-  - export PATH="~/bin:${PATH}"
+  - export PATH="$HOME/bin:${PATH}"
   - cd ..
   # verify installed versions
   - which cmake
@@ -64,6 +65,6 @@ before-script:
  - cd Release; rm -rf CMakeFiles/ cmake_install.cmake CMakeCache.txt; cd ..
 
 script:
-- mkdir Debug && cd Debug && cmake -DBOOST_ROOT=$BOOST_ROOT -DCMAKE_INSTALL_PREFIX:PATH=~ -DCMAKE_BUILD_TYPE=Debug ..  && make CXX=$COMPILER -j3 VERBOSE=1 && cd ..
-- mkdir Release && cd Release && cmake  -DBOOST_ROOT=$BOOST_ROOT -DCMAKE_INSTALL_PREFIX:PATH=~  -DCMAKE_BUILD_TYPE=Release .. && make CXX=$COMPILER -j3 VERBOSE=1 && cd ..
+- mkdir Debug && cd Debug && cmake -DBOOST_ROOT=$BOOST_ROOT -DCMAKE_INSTALL_PREFIX:PATH=~ -DCMAKE_BUILD_TYPE=Debug ..  && make CXX=$COMPILER_CXX -j3 VERBOSE=1 && cd ..
+- mkdir Release && cd Release && cmake  -DBOOST_ROOT=$BOOST_ROOT -DCMAKE_INSTALL_PREFIX:PATH=~  -DCMAKE_BUILD_TYPE=Release .. && make CXX=$COMPILER_CXX -j3 VERBOSE=1 && cd ..
 
