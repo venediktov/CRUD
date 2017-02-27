@@ -59,6 +59,6 @@ install:
   - sudo apt-get install libboost-dev libboost-regex-dev
 
 script: 
-- mkdir Debug && cd Debug && cmake .. -DBOOST_ROOT=$BOOST_ROOT -DCMAKE_INSTALL_PREFIX:PATH=~   && make CXX=$COMPILER -j3 VERBOSE=1 && cd ..
-- mkdir Release && cd Release && cmake  .. -DBOOST_ROOT=$BOOST_ROOT -DCMAKE_INSTALL_PREFIX:PATH=~  && make CXX=$COMPILER -j3 VERBOSE=1 && cd ..
+- mkdir Debug && cd Debug && cmake -DBOOST_ROOT=$BOOST_ROOT -DCMAKE_INSTALL_PREFIX:PATH=~ -DCMAKE_BUILD_TYPE=Debug ..  && make CXX=$COMPILER -j3 VERBOSE=1 && cd ..
+- mkdir Release && cd Release && cmake  -DBOOST_ROOT=$BOOST_ROOT -DCMAKE_INSTALL_PREFIX:PATH=~  -DCMAKE_BUILD_TYPE=Release .. && make CXX=$COMPILER -j3 VERBOSE=1 && cd ..
 
