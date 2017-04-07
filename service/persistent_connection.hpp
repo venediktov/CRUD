@@ -21,7 +21,6 @@
 #define HTTP_PERSISTENT_CONNECTION_HPP
 
 
-#include <iostream>
 #include <array>
 #include <memory>
 #include <utility>
@@ -65,20 +64,17 @@ public:
  
   /// Stop all asynchronous operations associated with the persistent_connection.
   void stop() {
-   //socket_.close();
+   socket_.close();
   }
  
 private:
   /// Perform an asynchronous read operation.
   void do_read()
   {
-    auto self(this->shared_from_this());
     socket_.async_read_some(boost::asio::buffer(buffer_),
         [=](boost::system::error_code ec, std::size_t bytes_transferred)
         {
-          if (ec == boost::asio::error::eof || !bytes_transferred) {
-              return;
-          }
+            
           if (!ec)
           {
             request_parser::result_type result;
@@ -118,13 +114,15 @@ private:
   /// Perform an asynchronous write operation.
   void do_write()
   {
-    auto self(this->shared_from_this());
     reply_.headers.emplace_back("Connection:" , "keep-alive");
     boost::asio::async_write(socket_, reply_.to_buffers(),
         [=](boost::system::error_code ec, std::size_t)
         {
             request_parser_.reset();
             reply_.headers.resize(0);
+            reply_.status = reply::status_type::ok;
+            reply_.content="";
+            request_ = request(); 
             do_read();
         });
   }
