@@ -25,4 +25,27 @@ Restful web-service written in C++11  based on boost.ASIO and CRUD handlers
                      std::cout << "POST request_data=" << match.data << std::endl;
                    });
 ```
-
+### All in one go
+```C++
+    // CREAT/READ/UPDATE/DELETE "/venue_handler/XEMDP/123"
+    handler.crud_match(boost::regex("/venue_handler/(\\w+)/(\\d+)") )
+           .put([](http::server::reply & r, const http::crud::crud_match<boost::cmatch> & match)
+              std::cout << "CREATE request=" << match[0] << "/" << match[1] << std::endl;
+              r = http::server::reply::stock_reply(http::server::reply::no_content);
+           })
+           .get([](http::server::reply & r, const http::crud::crud_match<boost::cmatch> & match) {
+              r << "name: " << match[1] << ", instance number: " << match[2]
+                << http::server::reply::flush("text") ;
+              std::cout << "READ request=" << match[0] << std::endl;
+           })
+           .post([](http::server::reply & r, const http::crud::crud_match<boost::cmatch>  & match) {
+              r << "name: " << match[1] << ", instance number: " << match[2]
+                << http::server::reply::flush("text") ;
+              std::cout << "UPDATE request=" << match[0] << std::endl;
+              std::cout << "UPDATE request_data=" << match.data << std::endl;
+           })
+           .del([](http::server::reply & r, const http::crud::crud_match<boost::cmatch> & match)
+              std::cout << "DELETE request=" << match[0] << "/" << match[1] << std::endl;
+              r = http::server::reply::stock_reply(http::server::reply::no_content);
+           }) ;
+```
