@@ -49,3 +49,15 @@ Restful web-service written in C++11  based on boost.ASIO and CRUD handlers
               r = http::server::reply::stock_reply(http::server::reply::no_content);
            }) ;
 ```
+
+### Setting up connection types
+
+#### For keep-alive persistent connections specifiy second template argument with presistent type for connection
+```C++
+http::server::server<simple_restful_dispatcher_t, http::server::persistent_connection> server{host,port,handler};
+```
+
+#### By default server is using non-persistent connection from the library 
+```C++
+http::server::server<simple_restful_dispatcher_t> server{host,port,handler};
+```
