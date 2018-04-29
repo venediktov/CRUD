@@ -61,3 +61,8 @@ http::server::server<simple_restful_dispatcher_t, http::server::persistent_conne
 ```C++
 http::server::server<simple_restful_dispatcher_t> server{host,port,handler};
 ```
+
+## Support on Beerpay
+Hey dude! Help me out for a couple of :beers:!
+
+[![Beerpay](https://beerpay.io/venediktov/CRUD/badge.svg?style=beer-square)](https://beerpay.io/venediktov/CRUD)  [![Beerpay](https://beerpay.io/venediktov/CRUD/make-wish.svg?style=flat-square)](https://beerpay.io/venediktov/CRUD?focus=wish)
