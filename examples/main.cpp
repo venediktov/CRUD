@@ -14,11 +14,11 @@
 #include <iostream>
 #include <string>
 #include <boost/asio.hpp>
-#include "server.hpp"
-#include "request_handler.hpp"
-#include "../handlers/crud_dispatcher.hpp"
-#include "request.hpp"
-#include "reply.hpp"
+#include "service/server.hpp"
+#include "service/request_handler.hpp"
+#include "service/request.hpp"
+#include "service/reply.hpp"
+#include "handlers/crud_dispatcher.hpp"
 
  
 int main(int argc, char* argv[])

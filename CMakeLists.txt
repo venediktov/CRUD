@@ -9,7 +9,6 @@ project(CRUD VERSION 0.1.0)
 #set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 #set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 
-add_subdirectory(service)
 
 set(CMAKE_CXX_STANDARD 14)
 SET(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -22,19 +21,9 @@ find_package(Boost
              REQUIRED
             )
 
-include_directories(${Boost_INCLUDE_DIRS} handlers service)
+add_subdirectory(service)
 
-add_executable(
-        my_service
-        main.cpp
-        )
-
-find_package (Threads)
-
-target_link_libraries(
-        my_service
-        crud_service
-        ${Boost_LIBRARIES}
-        ${CMAKE_THREAD_LIBS_INIT}
-        )
+if ( DEFINED CRUD_WITH_EXAMPLES)
+    add_subdirectory(examples)
+endif()
 

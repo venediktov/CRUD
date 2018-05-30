@@ -1,5 +1,33 @@
 # CRUD
-Restful web-service library written in C++11  based on boost.ASIO and CRUD handlers
+High performance Restful web-service library written in C++11  based on boost.ASIO and CRUD handlers
+
+The library supports persistent connections to achieve highest throughput 
+
+### Installation Linux 
+```bash
+$ mkdir Release
+$ cd Release
+$ cmake -DCMAKE_BUILD_TYPE=Release -DCRUD_WITH_EXAMPLES .. -G "Unix Makefiles"
+$ make -j $(nproc) install
+
+```
+
+### Installation Mac OS 
+```bash
+$ mkdir Release
+$ cd Release
+$ cmake -DCMAKE_BUILD_TYPE=Release -DCRUD_WITH_EXAMPLES .. -G "Unix Makefiles"
+$ make -j $(sysctl -n hw.physicalcpu) install
+
+
+### Running examples 
+```bash
+$ cd Release/examples
+$ ./restful_service  
+
+```
+
+## Utilizing API
 
 ### REST handler with regex
 
