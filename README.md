@@ -1,7 +1,7 @@
 # CRUD
 High performance Restful web-service library written in C++11  based on boost.ASIO and CRUD handlers
 
-The library supports persistent connections to achieve highest throughput 
+This library supports persistent connections to achieve highest throughput 
 
 ### Installation Linux 
 ```bash
@@ -16,16 +16,38 @@ $ make -j $(nproc) install
 ```bash
 $ mkdir Release
 $ cd Release
-$ cmake -DCMAKE_BUILD_TYPE=Release -DCRUD_WITH_EXAMPLES .. -G "Unix Makefiles"
+$ cmake -DCMAKE_BUILD_TYPE=Release -DCRUD_WITH_EXAMPLES=1 .. -G "Unix Makefiles"
 $ make -j $(sysctl -n hw.physicalcpu) install
 
 
 ### Running examples 
 ```bash
 $ cd Release/examples
-$ ./restful_service  
+$ ./webserver 0.0.0.0 8080 . & 
+$ ./simple_restful_service 0.0.0.0 8081 . & 
+$ ./regex_restful_service 0.0.0.0 8082 . & 
+$ ./persisted_regex_restful_service 0.0.0.0 8083 . &
 
 ```
+
+
+### Testing output and benchmarks
+```bash
+curl localhost:8080
+curl localhost:8081/venue_handler/RTB
+curl localhost:8082/venue_handler/ANY/123
+curl localhost:8083/venue_handler/ANY/123
+ab -k -n 100000 -c 30 http://localhost:8081/RTB
+ab -k -n 100000 -c 30 http://localhost:8082/ANY/123
+ab -k -n 100000 -c 30 http://localhost:8083/ANY/123
+
+```
+
+### Stop all background examples
+```bash
+pkill -9 "persisted|restful|webserver"
+```
+
 
 ## Utilizing API
 
