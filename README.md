@@ -1,9 +1,14 @@
 # CRUD
 High performance Restful web-service library written in C++11  based on boost.ASIO and CRUD handlers
 
-This library supports persistent connections to achieve highest throughput 
+This library supports persistent connections to achieve highest throughput and utilizes optinally regex for enpoints
 
-### Installation Linux 
+### Installing from GitHub
+```bash
+https://github.com/venediktov/CRUD.git
+```
+
+### Building on Linux 
 ```bash
 $ mkdir Release
 $ cd Release
@@ -12,7 +17,7 @@ $ make -j $(nproc) install
 
 ```
 
-### Installation Mac OS 
+### Building on  Mac OS 
 ```bash
 $ mkdir Release
 $ cd Release
