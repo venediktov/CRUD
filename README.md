@@ -18,7 +18,9 @@ $ mkdir Release
 $ cd Release
 $ cmake -DCMAKE_BUILD_TYPE=Release -DCRUD_WITH_EXAMPLES=1 .. -G "Unix Makefiles"
 $ make -j $(sysctl -n hw.physicalcpu) install
+
 ```
+
 
 
 ### Running examples 
