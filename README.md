@@ -115,6 +115,23 @@ http::server::server<simple_restful_dispatcher_t, http::server::persistent_conne
 http::server::server<simple_restful_dispatcher_t> server{host,port,handler};
 ```
 
+#### Adding CRUD as GitHub submodule to your project
+Create a file .gitmodules in the root of your project with contents
+```bash
+[submodule "CRUD"]
+	path = CRUD
+	url = https://github.com/venediktov/CRUD.git
+```
+
+Or execute following command in your repo
+```bash
+git submodule add https://github.com/venediktov/CRUD
+```
+
+If you add CRUD as submodule you will have to use ```git clone --recursive``` for your repo in order to get us as dependency
+
+You can look at GitHub subtrees instead ```git subtree add --prefix CRUD git@github.com:venediktov/CRUD.git master --squash```
+
 ## Support on Beerpay
 Hey dude! Help me out for a couple of :beers:!
 
