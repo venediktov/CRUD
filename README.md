@@ -7,7 +7,7 @@ This library supports persistent connections to achieve highest throughput and u
 
 ### Installing from GitHub
 ```bash
-https://github.com/venediktov/CRUD.git
+git clone https://github.com/venediktov/CRUD.git
 ```
 
 ### Building on Linux 
