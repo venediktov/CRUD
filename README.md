@@ -3,6 +3,8 @@ High performance Restful web-service library written in C++11  based on boost.AS
 
 This library supports persistent connections to achieve highest throughput and utilizes optinally regex for enpoints
 
+[![build ](https://travis-ci.org/venediktov/CRUD.svg?branch=master)](https://travis-ci.org/venediktov/CRUD)
+
 ### Installing from GitHub
 ```bash
 https://github.com/venediktov/CRUD.git
