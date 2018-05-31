@@ -12,7 +12,7 @@ https://github.com/venediktov/CRUD.git
 ```bash
 $ mkdir Release
 $ cd Release
-$ cmake -DCMAKE_BUILD_TYPE=Release -DCRUD_WITH_EXAMPLES .. -G "Unix Makefiles"
+$ cmake -DCMAKE_BUILD_TYPE=Release -DCRUD_WITH_EXAMPLES=1 .. -G "Unix Makefiles"
 $ make -j $(nproc) install
 
 ```
