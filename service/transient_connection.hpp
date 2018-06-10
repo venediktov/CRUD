@@ -32,18 +32,18 @@ template<class> class connection_manager;
  
 /// Represents a single connection from a client.
 template <typename request_handler_type>
-class connection
-  : public std::enable_shared_from_this<connection<request_handler_type> >
+class transient_connection
+  : public std::enable_shared_from_this<transient_connection<request_handler_type> >
 {
-    typedef connection<request_handler_type> self_type;
-    typedef std::shared_ptr<self_type> self_type_ptr;
-    typedef connection_manager<self_type_ptr> connection_manager_type;
+    using self_type     = transient_connection<request_handler_type> ;
+    using self_type_ptr = std::shared_ptr<self_type> ;
+    using connection_manager_type = connection_manager<self_type_ptr> ;
 public:
-  connection(const connection&) = delete;
-  connection& operator=(const connection&) = delete;
+  transient_connection(const transient_connection&) = delete;
+  transient_connection& operator=(const transient_connection&) = delete;
  
   /// Construct a connection with the given socket.
-  explicit connection(boost::asio::ip::tcp::socket socket,
+  explicit transient_connection(boost::asio::ip::tcp::socket socket,
       connection_manager_type& manager, request_handler_type& handler)
   : socket_(std::move(socket)),
     connection_manager_(manager),

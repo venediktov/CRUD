@@ -22,7 +22,7 @@
 #include <signal.h>
 #include <utility>
 #include <memory>
-#include "connection.hpp"
+#include "transient_connection.hpp"
 #include "connection_manager.hpp"
 #include "request_handler.hpp"
  
@@ -30,7 +30,7 @@ namespace http {
 namespace server {
  
 /// The top-level class of the HTTP server.
-template<typename request_handler_type, template<class> class  connection_impl = connection>
+template<typename request_handler_type, template<class> class  connection_impl = transient_connection>
 class server
 {
 public:
